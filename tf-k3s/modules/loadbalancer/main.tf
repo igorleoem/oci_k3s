@@ -1,7 +1,7 @@
 resource "oci_network_load_balancer_network_load_balancer" "k3s_nlb" {
   compartment_id = var.compartment_ocid
   display_name   = "k3s-nlb"
-  subnet_id      = oci_core_subnet.public_subnet.id
+  subnet_id      = var.public_subnet_id
 
   is_private                     = false
   is_preserve_source_destination = false
@@ -27,7 +27,7 @@ resource "oci_network_load_balancer_backend" "ingress_backend" {
   backend_set_name         = oci_network_load_balancer_backend_set.k3s_backend_set.name
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3s_nlb.id
   port                     = 80
-  target_id                = oci_core_instance.ingress.id
+  target_id                = var.ingress_instance_id
 }
 
 resource "oci_network_load_balancer_listener" "http_listener" {
@@ -56,7 +56,7 @@ resource "oci_network_load_balancer_backend" "ingress_backend_https" {
   backend_set_name         = oci_network_load_balancer_backend_set.k3s_backend_set_https.name
   network_load_balancer_id = oci_network_load_balancer_network_load_balancer.k3s_nlb.id
   port                     = 443
-  target_id                = oci_core_instance.ingress.id
+  target_id                = var.ingress_instance_id
 }
 
 resource "oci_network_load_balancer_listener" "https_listener" {

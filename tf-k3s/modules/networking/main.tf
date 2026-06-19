@@ -38,7 +38,6 @@ resource "oci_core_security_list" "public_sl" {
     destination = "0.0.0.0/0"
   }
 
-  # Allow SSH (Restricted via variable)
   ingress_security_rules {
     protocol = "6"
     source   = var.ssh_source_cidr
@@ -48,7 +47,6 @@ resource "oci_core_security_list" "public_sl" {
     }
   }
 
-  # Allow HTTP
   ingress_security_rules {
     protocol = "6"
     source   = "0.0.0.0/0"
@@ -58,7 +56,6 @@ resource "oci_core_security_list" "public_sl" {
     }
   }
 
-  # Allow HTTPS
   ingress_security_rules {
     protocol = "6"
     source   = "0.0.0.0/0"
@@ -68,7 +65,6 @@ resource "oci_core_security_list" "public_sl" {
     }
   }
 
-  # Allow Kubernetes NodePort range
   ingress_security_rules {
     protocol = "6"
     source   = "0.0.0.0/0"
@@ -78,7 +74,6 @@ resource "oci_core_security_list" "public_sl" {
     }
   }
 
-  # Allow internal VCN traffic
   ingress_security_rules {
     protocol = "all"
     source   = "10.0.0.0/16"
@@ -108,7 +103,6 @@ resource "oci_core_security_list" "private_sl" {
     destination = "0.0.0.0/0"
   }
 
-  # Allow all internal traffic
   ingress_security_rules {
     protocol = "all"
     source   = "10.0.0.0/16"

@@ -117,3 +117,9 @@ variable "git_email" {
   description = "Email address for GitHub container registry authentication"
   type        = string
 }
+
+variable "acme_email" {
+  description = "Email for Let's Encrypt ACME"
+  type        = string
+  default     = "admin@example.com"
+}

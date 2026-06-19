@@ -1,38 +1,36 @@
-# Terraform Remote State Backend for OCI Object Storage
+# Terraform Remote State Backend — OCI Object Storage (S3-compatible)
 #
-# This file configures remote state storage in OCI Object Storage using S3 compatibility.
-# 
-# PREREQUISITES:
-# 1. Generate OCI Customer Secret Keys:
-#    - Go to OCI Console > Profile > User Settings > Customer Secret Keys
-#    - Click "Generate Secret Key" and SAVE both keys immediately
-#    - The Access Key = AWS_ACCESS_KEY_ID
-#    - The Secret Key = AWS_SECRET_ACCESS_KEY (shown only once!)
+# PREREQUISITES before running terraform init:
+#   1. Generate OCI Customer Secret Keys:
+#      OCI Console → Profile → User Settings → Customer Secret Keys → Generate Secret Key
+#      Save both keys immediately — the secret is shown only once.
+#      Access Key  → AWS_ACCESS_KEY_ID
+#      Secret Key  → AWS_SECRET_ACCESS_KEY
 #
-# 2. Set environment variables before running terraform init:
-#    export AWS_ACCESS_KEY_ID="<your-access-key>"
-#    export AWS_SECRET_ACCESS_KEY="<your-secret-key>"
+#   2. Export the keys in your shell:
+#      export AWS_ACCESS_KEY_ID="<your-access-key>"
+#      export AWS_SECRET_ACCESS_KEY="<your-secret-key>"
 #
-# 3. Uncomment the terraform block below
+#   3. Run: terraform init -migrate-state
 #
-# 4. Run: terraform init -migrate-state
-#
-# BUCKET: k3s-tfstate (already created)
+# BUCKET:    k3s-tfstate (provisioned by modules/storage)
 # NAMESPACE: idlam3ku7ae7
-#
-# terraform {
-#   backend "s3" {
-#     bucket                      = "k3s-tfstate"
-#     key                         = "terraform.tfstate"
-#     region                      = "us-ashburn-1"
-#     endpoints = {
-#       s3 = "https://idlam3ku7ae7.compat.objectstorage.us-ashburn-1.oraclecloud.com"
-#     }
-#     skip_region_validation      = true
-#     skip_credentials_validation = true
-#     skip_requesting_account_id  = true
-#     skip_metadata_api_check     = true
-#     use_path_style              = true
-#     skip_s3_checksum            = true
-#   }
-# }
+
+terraform {
+  backend "s3" {
+    bucket = "k3s-tfstate"
+    key    = "terraform.tfstate"
+    region = "us-ashburn-1"
+
+    endpoints = {
+      s3 = "https://idlam3ku7ae7.compat.objectstorage.us-ashburn-1.oraclecloud.com"
+    }
+
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_requesting_account_id  = true
+    skip_metadata_api_check     = true
+    use_path_style              = true
+    skip_s3_checksum            = true
+  }
+}

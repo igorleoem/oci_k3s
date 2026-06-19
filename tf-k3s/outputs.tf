@@ -1,25 +1,35 @@
 output "ingress_public_ip" {
-  value = oci_core_instance.ingress.public_ip
+  value = module.compute.ingress_public_ip
 }
 
 output "load_balancer_ip" {
-  value = oci_network_load_balancer_network_load_balancer.k3s_nlb.ip_addresses[0].ip_address
+  value = module.loadbalancer.nlb_public_ip
 }
 
 output "server_private_ip" {
-  value = oci_core_instance.server.private_ip
+  value = module.compute.server_private_ip
 }
 
 output "worker_private_ip" {
-  value = oci_core_instance.worker.private_ip
+  value = module.compute.worker_private_ip
 }
 
 output "kubeconfig_command" {
-  value = "ssh -i /Users/sudhanva/.oci/oci_api_key.pem ubuntu@${oci_core_instance.ingress.public_ip} 'ssh ubuntu@10.0.2.10 sudo cat /etc/rancher/k3s/k3s.yaml'"
+  value = "ssh -i ${var.private_key_path} ubuntu@${module.compute.ingress_public_ip} 'ssh ubuntu@10.0.2.10 sudo cat /etc/rancher/k3s/k3s.yaml'"
 }
 
 output "domain_url" {
   value = "https://${var.domain_name}"
+}
+
+output "tfstate_bucket" {
+  value       = module.storage.bucket_name
+  description = "Object Storage bucket name for Terraform state backend"
+}
+
+output "tfstate_namespace" {
+  value       = module.storage.bucket_namespace
+  description = "Object Storage namespace for backend configuration"
 }
 
 output "next_steps" {
@@ -28,6 +38,6 @@ output "next_steps" {
 2. Push the changes to the repository.
 3. Wait for the instances to provision and K3s to install.
 4. Verify Argo CD status:
-   ssh -J ubuntu@${oci_core_instance.ingress.public_ip} ubuntu@10.0.2.10 "sudo kubectl get applications -n argocd"
+   ssh -J ubuntu@${module.compute.ingress_public_ip} ubuntu@10.0.2.10 "sudo kubectl get applications -n argocd"
 EOT
 }

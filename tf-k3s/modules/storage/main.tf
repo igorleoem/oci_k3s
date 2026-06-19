@@ -10,13 +10,3 @@ resource "oci_objectstorage_bucket" "tfstate" {
   versioning     = "Enabled"
   freeform_tags  = var.common_tags
 }
-
-output "tfstate_bucket_name" {
-  value       = oci_objectstorage_bucket.tfstate.name
-  description = "Object Storage bucket name for state backend"
-}
-
-output "tfstate_bucket_namespace" {
-  value       = data.oci_objectstorage_namespace.ns.namespace
-  description = "Object Storage namespace for backend configuration"
-}
