@@ -20,7 +20,8 @@ resource "local_file" "cert_manager_cluster_issuer" {
 resource "local_file" "external_dns_kustomization" {
   filename = "${var.argocd_output_path}/infrastructure/external-dns/kustomization.yaml"
   content = templatefile("${var.templates_path}/external-dns/kustomization.yaml.tpl", {
-    domain_name = var.domain_name
+    domain_name        = var.domain_name
+    cloudflare_zone_id = var.cloudflare_zone_id
   })
 }
 

@@ -17,6 +17,7 @@ write_files:
       spec:
         chart: argo-cd
         repo: https://argoproj.github.io/argo-helm
+        version: "9.7.0"
         targetNamespace: argocd
         createNamespace: true
         valuesContent: |-
@@ -132,4 +133,4 @@ runcmd:
   - iptables -F INPUT
   - iptables -F FORWARD
   - netfilter-persistent save
-  - curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="server --disable traefik --tls-san ${public_ip}" K3S_TOKEN=${k3s_token} sh -
+  - curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION="v1.36.1+k3s1" INSTALL_K3S_EXEC="server --disable traefik --tls-san ${public_ip}" K3S_TOKEN=${k3s_token} sh -

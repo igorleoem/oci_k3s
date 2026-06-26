@@ -6,8 +6,8 @@ This documentation site explains how to deploy and operate a K3s Kubernetes clus
 
 ## Project Overview
 
-- **Repository**: https://github.com/nsudhanva/k3s-oracle
-- **Documentation**: https://k3s.sudhanva.me
+- **Repository**: https://github.com/your-username/oci_k3s
+- **Documentation**: https://k3s.example.com
 - **License**: MIT
 
 ## What This Project Does
@@ -78,5 +78,4 @@ A: Add manifests to argocd/apps/ and push to Git - see /operation/adding-apps
 
 ## Contact
 
-- GitHub Issues: https://github.com/nsudhanva/k3s-oracle/issues
-- Author: Sudhanva Narayana
+- GitHub Issues: https://github.com/your-username/oci_k3s/issues

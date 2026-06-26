@@ -53,7 +53,7 @@ The NLB provides a stable IP that doesn't change if the ingress node is replaced
 External DNS creates A records in Cloudflare pointing your domain to the ingress node's public IP:
 
 ```text
-k3s.example.com -> 132.226.43.62
+k3s.example.com -> <ingress-ip>
 ```
 
 ### hostPort Binding
@@ -89,10 +89,10 @@ The ingress node is labeled during K3s installation with `--node-label role=ingr
 flowchart TB
     subgraph Internet
         User((User))
-        DNS[DNS: k3s.example.com<br/>→ 132.226.43.62]
+        DNS[DNS: k3s.example.com<br/>→ <ingress-ip>]
     end
 
-    subgraph Ingress["Ingress Node (132.226.43.62)"]
+    subgraph Ingress["Ingress Node (<ingress-ip>)"]
         HP[hostPort :443]
         Envoy[Envoy Container]
     end
@@ -159,14 +159,14 @@ listeners:
 - name: https-docs
   port: 443
   protocol: HTTPS
-  hostname: "k3s.sudhanva.me"
+  hostname: "k3s.example.com"
   tls:
     certificateRefs:
     - name: docs-tls
 - name: https-argocd
   port: 443
   protocol: HTTPS
-  hostname: "cd.k3s.sudhanva.me"
+  hostname: "cd.k3s.example.com"
   tls:
     certificateRefs:
     - name: argocd-tls
@@ -215,7 +215,7 @@ spec:
   - name: public-gateway
     sectionName: http
   hostnames:
-  - "k3s.sudhanva.me"
+  - "k3s.example.com"
   rules:
   - filters:
     - type: RequestRedirect

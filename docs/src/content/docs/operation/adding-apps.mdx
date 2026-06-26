@@ -58,7 +58,7 @@ argocd/
    spec:
      project: default
      source:
-       repoURL: https://github.com/nsudhanva/k3s-oracle.git
+       repoURL: https://github.com/your-username/oci_k3s.git
        targetRevision: HEAD
        path: argocd/apps/my-app
      destination:
@@ -147,7 +147,7 @@ spec:
     - name: public-gateway
       namespace: default
   hostnames:
-    - "my-app.k3s.sudhanva.me"
+    - "my-app.k3s.example.com"
   rules:
     - backendRefs:
         - name: my-app
@@ -209,7 +209,7 @@ spec:
 
 ```bash
 # Via kubectl
-ssh -J ubuntu@132.226.43.62 ubuntu@10.0.2.10 \
+ssh -J ubuntu@<ingress-ip> ubuntu@10.0.2.10 \
   "sudo kubectl get applications -n argocd"
 
 # Via ArgoCD CLI
@@ -220,14 +220,14 @@ argocd app get my-app
 ### Check Pod Status
 
 ```bash
-ssh -J ubuntu@132.226.43.62 ubuntu@10.0.2.10 \
+ssh -J ubuntu@<ingress-ip> ubuntu@10.0.2.10 \
   "sudo kubectl get pods -n my-app"
 ```
 
 ### View Logs
 
 ```bash
-ssh -J ubuntu@132.226.43.62 ubuntu@10.0.2.10 \
+ssh -J ubuntu@<ingress-ip> ubuntu@10.0.2.10 \
   "sudo kubectl logs -n my-app -l app=my-app"
 ```
 

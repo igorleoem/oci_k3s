@@ -74,9 +74,9 @@ variable "git_username" {
 }
 
 variable "git_repo_name" {
-  description = "The repository name (e.g. k3s-oracle) to construct GHCR image paths."
+  description = "The repository name (e.g. oci_k3s) to construct GHCR image paths."
   type        = string
-  default     = "k3s-oracle"
+  default     = "oci_k3s"
 }
 
 variable "k3s_token" {
@@ -95,7 +95,7 @@ variable "common_tags" {
   description = "Tags to be applied to all resources"
   type        = map(string)
   default = {
-    Project     = "k3s-oracle-free"
+    Project     = "oci_k3s-free"
     ManagedBy   = "Terraform"
     Environment = "Production"
   }

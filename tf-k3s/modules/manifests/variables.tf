@@ -52,3 +52,8 @@ variable "oci_region" {
   description = "OCI region"
   type        = string
 }
+
+variable "cloudflare_zone_id" {
+  description = "Cloudflare Zone ID for External DNS zone filtering"
+  type        = string
+}

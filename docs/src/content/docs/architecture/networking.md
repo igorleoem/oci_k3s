@@ -155,9 +155,9 @@ sequenceDiagram
     GH->>Argo: Webhook trigger
     Argo->>Argo: Sync HTTPRoute
     ED->>ED: Watch HTTPRoute
-    ED->>CF: Create/Update A record<br/>k3s.example.com → 132.226.43.62
+    ED->>CF: Create/Update A record<br/>k3s.example.com → <ingress-ip>
     User->>CF: DNS query: k3s.example.com
-    CF->>User: 132.226.43.62
+    CF->>User: <ingress-ip>
     User->>User: Connect to ingress node
 ```
 
@@ -174,5 +174,5 @@ flowchart LR
 
     HR -->|watches| ED
     ED -->|API call| DNS
-    DNS -->|A Record| IP[132.226.43.62]
+    DNS -->|A Record| IP[<ingress-ip>]
 ```

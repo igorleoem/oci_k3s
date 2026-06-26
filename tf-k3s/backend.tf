@@ -18,12 +18,12 @@
 
 terraform {
   backend "s3" {
-    bucket = "k3s-tfstate"
+    bucket = "bkt_remote_state"
     key    = "terraform.tfstate"
     region = "us-ashburn-1"
 
     endpoints = {
-      s3 = "https://idlam3ku7ae7.compat.objectstorage.us-ashburn-1.oraclecloud.com"
+      s3 = "https://idiry3fl5gsx.objectstorage.us-ashburn-1.oci.customer-oci.com"
     }
 
     skip_region_validation      = true

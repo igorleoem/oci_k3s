@@ -71,4 +71,5 @@ module "manifests" {
   nlb_public_ip       = module.loadbalancer.nlb_public_ip
   vault_id            = module.secrets.vault_id
   oci_region          = var.region
+  cloudflare_zone_id  = var.cloudflare_zone_id
 }

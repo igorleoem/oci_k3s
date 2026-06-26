@@ -7,7 +7,7 @@ resources:
 helmCharts:
   - name: external-dns
     repo: https://kubernetes-sigs.github.io/external-dns/
-    version: 1.13.0
+    version: 1.21.1
     releaseName: external-dns
     namespace: external-dns
     valuesInline:
@@ -20,9 +20,9 @@ helmCharts:
               name: cloudflare-api-token-secret
               key: api-token
       domainFilters:
-        - sudhanva.me
+        - ${domain_name}
       extraArgs:
-        - --zone-id-filter=293c1768d72a5378bbdb4d59fc8e8bfc
+        - --zone-id-filter=${cloudflare_zone_id}
       sources:
         - crd
       rbac:

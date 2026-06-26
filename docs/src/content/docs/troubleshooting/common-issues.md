@@ -304,7 +304,7 @@ This is included in the `applications.yaml.tpl` template automatically.
 
 When using Envoy Gateway for TLS termination, ArgoCD may cause redirect loops because it expects HTTPS connections internally.
 
-Symptom: `cd.k3s.sudhanva.me` returns HTTP 307 redirect loop.
+Symptom: `cd.k3s.example.com` returns HTTP 307 redirect loop.
 
 Fix: Configure ArgoCD to run in insecure mode (TLS handled by Gateway):
 
@@ -321,7 +321,7 @@ The ArgoCD kustomization template includes this configuration.
 
 HTTPRoutes may serve content on both HTTP and HTTPS if not bound to specific listeners.
 
-Symptom: `http://k3s.sudhanva.me` returns 200 instead of redirecting to HTTPS.
+Symptom: `http://k3s.example.com` returns 200 instead of redirecting to HTTPS.
 
 Fix: Use `sectionName` to bind routes to HTTPS listeners and create separate redirect routes:
 
@@ -347,7 +347,7 @@ spec:
     namespace: envoy-gateway-system
     sectionName: http
   hostnames:
-  - "k3s.sudhanva.me"
+  - "k3s.example.com"
   rules:
   - filters:
     - type: RequestRedirect
